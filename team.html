@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>TeamBuilder</title>
+  </head>
+  <body>
+    
+    <div class="container">
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+              <span class="navbar-brand mb-0 h1"> Welcome to TeamBuilder</span>
+            </div>
+          </nav>
+        <div class="form-floating mb-3" style="margin-top: 15px;">
+            <input  class="form-control" id="nop1" placeholder="name@example.com">
+            <label for="floatingInput">Player Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input  class="form-control" id="nop2" placeholder="name@example.com">
+            <label for="floatingInput">Player Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input  class="form-control" id="nop3" placeholder="name@example.com">
+            <label for="floatingInput">Player Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input  class="form-control" id="nop4" placeholder="name@example.com">
+            <label for="floatingInput">Player Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input  class="form-control" id="nop5" placeholder="name@example.com">
+            <label for="floatingInput">Player Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input  class="form-control" id="nop6" placeholder="name@example.com">
+            <label for="floatingInput">Player Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input  class="form-control" id="nop7" placeholder="name@example.com">
+            <label for="floatingInput">Player Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input  class="form-control" id="nop8" placeholder="name@example.com">
+            <label for="floatingInput">Player Name</label>
+          </div>
+          
+
+          <button type="submit" class="btn btn-primary" onclick="players()">Submit</button>
+          <div class="container" id="display" style="margin-top: 10px;">
+            
+          </div>
+          <div class="container" id="t">
+              <h1>
+          </div>
+         
+
+    </div>
+   
+    
+    <script>
+        function players()
+        {
+            var nop1 = document.getElementById('nop1')
+            var nop2 = document.getElementById('nop2')
+            var nop3 = document.getElementById('nop3')
+            var nop4 = document.getElementById('nop4')
+            var nop5 = document.getElementById('nop5')
+            var nop6 = document.getElementById('nop6')
+            var nop7 = document.getElementById('nop7')
+            var nop8 = document.getElementById('nop8')
+            var arr=[]
+            arr.push(nop1.value)
+            arr.push(nop2.value)
+            arr.push(nop3.value)
+            arr.push(nop4.value)
+            arr.push(nop5.value)
+            arr.push(nop6.value)
+            arr.push(nop7.value)
+            arr.push(nop8.value)
+            var value = "";
+ 
+            var result = arr.filter(function(x){
+                return x !== value;
+            });
+            var t1=[];
+            var t2=[];
+            var n= result.length ;
+            if(n%2!=0)
+            {
+                rem=result.pop();
+                var r = (Math.floor((Math.random() * 2) + 1));
+                if(r==1){
+                    t1.push(rem)
+
+                }
+                else{
+                    t2.push(rem)
+                }
+            }
+            var n= result.length ;
+            for (let index = 0; index < n; index++) {
+                
+                var ran = (Math.floor((Math.random() * 2) + 1))-1;
+                var rant= (Math.floor((Math.random() * 2) + 1))-1;
+                //console.log(ran,rant)
+                if(ran==0 & rant==0)
+                {
+                    t1.push(result[index])
+                    t2.push(result[index+1])
+
+                }
+                if(ran==1 & rant==1)
+                {
+                    t1.push(result[index])
+                    t2.push(result[index+1])
+
+                }
+                if(ran==0 & rant==1)
+                {
+                    t1.push(result[index+1])
+                    t2.push(result[index])
+
+                }
+                if(ran==1 & rant==0)
+                {
+                    t1.push(result[index+1])
+                    t2.push(result[index])
+
+                }
+                index++;
+            }
+            var t = (Math.floor((Math.random() * 2) + 1));
+            if(t==1){ var toss="Team 1 has won the toss"}
+            else{var toss="Team 2 has won the toss"}
+            console.log(t1)
+            console.log(t2)
+            console.log(toss)
+
+
+
+            var d = document.getElementById('display')
+            d.innerHTML+=`<h3>Team 1 </h3>`
+            var table = document.createElement('table');
+            table.setAttribute('border','1');
+            table.setAttribute('width','100%');
+            table.setAttribute('class','table table-dark table-hover table-striped');
+
+            var row = table.insertRow(0);
+            for(j=1; j<=t1.length; j++){
+                var text = document.createTextNode(t1[j-1]);
+                var cell = row.insertCell(j-1);
+                cell.setAttribute('align','center')
+                cell.appendChild(text);
+            }
+            d.appendChild(table);
+            d.innerHTML+=`<h3>Team 2</h3>`
+            var table = document.createElement('table');
+            table.setAttribute('border','1');
+            table.setAttribute('width','100%')
+            table.setAttribute('class','table table-success table-striped');
+            var row = table.insertRow(0);
+            for(j=1; j<=t2.length; j++){
+                var text = document.createTextNode(t2[j-1]);
+                var cell = row.insertCell(j-1);
+                cell.setAttribute('align','center')
+                cell.appendChild(text);
+            }
+            d.appendChild(table);
+
+            c= document.getElementById('t')
+            c.innerHTML='<h3 style="background-color:powderblue;">'+toss+'</h3>';
+
+        }
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+   
+  </body>
+</html>
